@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Word Cloud</title>
+    <meta charset="utf-8"/>
+
+    <script src="https://d3js.org/d3.v7.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.js"></script>
+
+    <!-- <style>
+        svg {
+            border: 1px solid gray;
+        }
+    </style> -->
+    <!-- Charge the css file -->
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body>
+
+    <div class="intro-wordcloud-container">
+        <h1 class="intro-wordcloud-title"> Word Cloud</h1>
+        <p class="intro-wordcloud-text"> Bienvenido al Word Cloud de Spotify, a continuación se presentan los artistas mas escuchados globalmente en la plataforma 
+            de streaming Spotify en los años 2017 - 2021. Sientete libre de explorar todos los artistas. Si quieres cambiar el país, presiona el selector de abajo 
+            para filtrar por país. Si te interesa un artista en particular presionalo y deslizate hacia abajo para ver en que meses fue mas o menos escuchado.
+        </p>
+    </div>
+    <div class="selector">
+        <label for="order">Select Country: </label>
+        <select name="select" id="select">
+            <option value="Global">Global</option>
+            <option value="United States">United States</option>
+            <option value="Chile">Chile</option>
+            <option value="Germany">Germany</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="France">France</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+            <option value="Spain">Spain</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Italy">Italy</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="South Korea">South Korea</option>
+            <option value="Russia">Russia</option>
+            <option value="Poland">Poland</option>
+            <option value="Turkey">Turkey</option>
+            <option value="Belgium">Belgium</option>
+            <option value="Switzerland">Switzerland</option>
+            <option value="Austria">Austria</option>
+            <option value="Norway">Norway</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Finland">Finland</option>
+            <option value="Ireland">Ireland</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Saudi Arabia">Saudi Arabia</option>
+        </select>
+    </div>
+<div id="viz1">
+</div>
+<div id="artists">
+</div>
+<div id="viz2"> 
+</div>
+
+<script src="./js/main.js" type="text/javascript"></script>
+</body>
+</html>

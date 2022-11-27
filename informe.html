@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Informe Examen</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="styles/informe.css">
+</head>
+
+<h1>Examen IIC2026 Aníbal Contreras</h1>
+<p>
+    <h3>Primer Nivel: Caracterización del Dominio</h3>
+    <p>Spotify es la plataforma de streaming lider en cuanto a reproducción de música se refiere.
+        Esta cuenta con 422 millones de usuarios activos que se reparten alrededor del mundo.
+        Es por esto que se ha convertido en una de las plataformas más populares para escuchar música.
+        Spotify cuenta con una gran variedad de géneros musicales, desde el rock hasta el jazz, pasando por el pop y el rap.
+        Además, cuenta con una gran cantidad de artistas, tanto consagrados como emergentes, que se encuentran en su plataforma.
+        Spotify cuenta con una gran cantidad de datos que se pueden analizar, como por ejemplo, los géneros musicales más escuchados,
+        los artistas mas escuchados, los países con mayor cantidad de usuarios, etc. Especificamente para esta visualización, es de interés
+        saber que artistas son mas escuchados globalmente y cuales son los artistas que mas escucha la gente dependiendo del país.
+    </p>
+    <p>
+        Para esto, se utilizó el dataset <a href="https://www.kaggle.com/datasets/dhruvildave/spotify-charts">Spotify Charts</a> que contiene
+        información de las canciones que se encuentran en el top 200 mas escuchado de cada cada uno de los 71 países que Spotify tiene en su plataforma desde el año 2017 a 2021.
+        El dataset tiene 20 millones de filas y 9 columnas, por lo que para poder desarrollar una buena visualización se procedió
+        a realizar un preprocesamiento de los datos. Se generaron tres archivos csv, muy similares los tres, pero se hizo de esta manera para simplificar la forma de trabajar con d3. El primero corresponde a un dataset que contiene la cantidad de streams de un artista en una región en específico. Para esto lo que se hizo fue eliminar las columnas que no se utilizarían, y agrupar por región y artista, sumando la cantidad de streams de cada uno de los artistas correspondientes a cada región y se ordenó de mayor a menor para obtener un ranking. Gracias a esto, se obtuvo un dataset que tiene por cada país, a los artistas mas escuchados ordenados de mayor a menor y la cantidad total de streams que tiene el artista en cada uno de los países. El segundo es el mismo que el primero, salvo que este está filtrado por la región global, lo que permite que la visualización inicial despliegue todos los artistas sin necesidad de aplicar un filtro. El tercero corresponde a un dataset que contiene la cantidad de streams de un artista en una región en específico en un mes en específico. Se hizo un preprocesamiento consistió en crear una columna que contiene el mes - año y luego se agrupó por artista, región y mes - año, sumando la cantidad de streams de cada artista en cada región.
+        
+    </p>
+    <p> 
+        El usuario objetivo corresponde a cualquier persona que quiera saber cuales son los artistas mas escuchados en el mundo, como también saber cuales son los artistas mas escuchados en los distintos países.
+        A esta visualización se le podría dar un uso mas profesional, como por ejemplo para una persona que organize eventos y desee saber que artista es mas esuchado en el país para poder contratarlo, o también puede ser
+        utilizado por el departamento de marketing de Spotify, para saber que artistas son mas populares en cada país, y así hacer campañas de marketing para promocionarlos y lograr generar mas visitas.
+        Se espera que con esta herramienta se puedan visualizar los artistas mas escuchados globalmente y se pueda filtrar por país y obtener información relevante de estos, como por ejemplo, 
+        la cantidad de streams que tienen en cada país, en que ranking se ubican y como variaron sus reproducciones a lo largo del tiempo.
+        Es interesante el choque cultural que hay dependiendo del país, ya que se puede ver que en algunos países hay artistas que son muy populares, y en otros no tanto o lisa y llanamente no son conocidos.
+    </p>
+
+    <p>
+    <h3>Segundo Nivel: Abstracción de Datos y Tareas</h3>
+    <h4>Abstracción de Datos</h4>
+    Los tipos de datos singulares son atributo e item. A continuación se detallan los atributos para el primer y segundo dataset (Hay atributos que no fueron utilizados pero se encuentran en el dataset,
+    al no ser utilizados no los mencionaré en este informe) (En lo único que cambian el primero y el segundo dataset es que el segundo tiene un valor fijo para la región Global):
+    <ul>
+        <li>Region: Corresponde a la región donde el artista tiene cierta cantidad de streams</li>
+        <li>Artist: Corresponde al artista en cuestión</li>
+        <li>Streams: Corresponde a la variable cuantitativa de cantidad total de streams en dicha región para dicho artista</li>
+        <li>Rank: Corresponde a la posición en la que el artista se encuentra poscionado en dicho país (Mientras menor el número mejor posicionado se encuentra en el ranking)</li>
+    </ul>
+    Se tiene que la región es un dato categórico, pues brinda la pertenencia del item a un país en particular.
+    El artista es un dato categórico, pues brinda la pertenencia del item a un artista en particular.
+    Los streams son un dato cuantitativo, pues brinda la cantidad de streams que tiene un artista en un país en particular.
+    El rank es un dato ordinal, pues brinda la posición en el ranking en la que se encuentra un artista en un país en particular.
+    La unión de estos atributos forman un ítem.
+    <p>A continuación se detallan los atributos para el tercer dataset:</p>
+
+    <ul>
+        <li> Region: Corresponde a la región donde el artista tiene cierta cantidad de streams</li>
+        <li> Artist: Corresponde al artista en cuestión</li>
+        <li> Streams: Corresponde a la variable cuantitativa de de cantidada total de streams en dicha región para dicho artista en cierto mes dentro de los 4 años</li>
+        <li> Date: Corresponde a la fecha donde se tiene cierta cantidad de streams</li>
+    </ul>
+        
+    </p>
+    </p>
+    <p>
+    Se tiene que la región es un dato categórico, pues brinda la pertenencia del item a un país en particular.
+    El artista es un dato categórico, pues brinda la pertenencia del item a un artista en particular.
+    Los streams son un dato cuantitativo, pues brinda la cantidad de streams que tiene un artista en un país en particular.
+    El rank es un dato ordinal, pues brinda la posición en el ranking en la que se encuentra un artista en un país en particular.
+    El date es un dato categórico, pues brinda la fecha en la que se obtuvo la cantidad de streams de un artista en un país en particular.
+    La unión de estos atributos forman un ítem.
+
+    </p>
+    <h4>Abstracción de Tareas</h4>
+    <h5>Primera Tarea (Acción = Explorar los artistas mas escuchados globalmente, Objetivo = Familiarizarse con los artistas mas escuchados)</h5>
+    <p>
+        Explorar los artistas mas escuchados globalmente en la plataforma. Esta acción pertenece en gran medida al nivel de analizar y se realiza 
+        esta acción con el objetivo de consumir información. El usuario debe disfrutar, pues se sentirá atraido por como se entrega la información, incitandolo a explorar mas la visualización.
+        Esta acción también puede pertenecer al nivel de buscar un objetivo desconocido con una localización desconocida, pues el usuario no sabrá que busca ni donde, pues a priori no sabe 
+        cuales son los artistas mas escuchados en el mundo.
+
+    </p>
+    <h5> Segunda Tarea (Acción = Identificar un artista, Objetivo = Obtener infromación mas específica del artista)</h5>
+    <p>
+        Acción: Identificar un artista, esta acción pertenece al nivel de consultar, pues el usuario 
+        quiere obtener información mas específica del artista que llamó su atención. Aparte de la cantidad 
+        de streams que tuvo un artista del 2017 al 2021 interesa saber como se distribuyen esos streams 
+        a lo largo de los meses, para conocer si el artista fue popular en un mes en particular o si es 
+        popular a lo largo de los años. 
+    </p>
+    <h5> Tercera Tarea (Acción = Seleccionar otro país, Objetivo = Ver información exclusiva de dicho país)</h5>
+    <p>
+        Acción: Seleccionar otro país, esta acción pertenece al nivel de consultar, pues el usuario 
+        quiere obtener información específica de distintos países. Es de interés saber como varían los gustos 
+        musicales de los usuarios de Spotify en distintos países y ver como varían la cantidad de streams de los 
+        artistas en función de los países. 
+    <p>
+        
+    </p>
+    <h3>Tercer Nivel: Codficicación Visual y de Interacción</h3>
+    <h4> Tarea 1: Explorar Artistas mas escuchados globalmente</h4>
+    <p>
+       Para lograr el objetivo planteado por esta tarea, se hizo uso de:
+       <div>
+        <li>
+            <strong>Idioms visuales:</strong> La visualización es una nube de palabras, donde la palabra representa el 
+            nombre del artista y el tamaño de la palabra representa la cantidad de streams que tiene 
+            el artista en el mundo. Por tanto, se tiene que la marca es el nombre del artista y el canal 
+            será el tamaño de la palabra (que es el nombre del artista). Para diferenciar se usará 
+            otro canal que son los colores. Se usó una paleta de 12 colores extraída de <a href="https://colorbrewer2.org/?type=diverging&scheme=RdYlBu&n=3#type=qualitative&scheme=Paired&n=11">colorBrewer</a>, 
+            que es el máximo número de colores que se pueden distinguir en una visualización. Se 
+            implementó una nube de palabras porque se consideró que era la mejor forma de mostrar la 
+            información respecto a mas de 500 artistas en una sola visualización, respetando los 
+            principios de interacción humano - computador, pues de esta forma el usuario tiene toda 
+            la información en un solo lugar, sin necesidad de tener que moverse a otra visualización.
+        </li>
+        <li>
+            <strong>Idioms de interacción:</strong> Para no quedarse solamente con los nombres del artista, sin tener 
+            tanta claridad de la información de cada uno, se implementó una interacción con el mouse 
+            en forma de tooltip que al pasar el mouse sobre el nombre, se muestra la cantidad de streams 
+            que tiene el artista en el mundo y en que ranking se encuentra posicionado. 
+            Esto se hizo con el objetivo de obtener un poco 
+            mas de información de cada artista, sin necesidad de tener que hacer click en el artista, 
+            pues es información general que todavía se encuentra en el proceso de exploración 
+            de la herramienta.
+        </li>
+       </div>
+    </p>
+    <h4> Tarea 2: Identificar un artista en particular</h4>
+    <p>
+        Para lograr el objetivo planteado por esta tarea, se hizo uso de:
+        <div>
+            <li>
+                <strong>Idioms visuales:</strong> Se implementó un gráfico de línea, donde en el eje x se tienen las fechas 
+                separadas en meses desde enero 2017 hasta diciembre del 2021. En el eje y se tiene la cantidad 
+                de streams que tiene el artista en ese mes correspondiente. Es decir, la línea representa una marca
+                y el canal se representa por la posición en el eje y. También se implementó otra marca que es un círculo, 
+                que se posiciona sobre la línea al inicio de cada mes, lo que permite al usuario identificar a que mes corresponde 
+                dicha cantidad de stremas. Se usó un gráfico de línea porque se consideró 
+                la mejor forma de mostrar como varían los streams de un artista en el tiempo, permitiendo conocer al 
+                usuario si el artista fue popular solo unos meses o fue algo que se mantuvo en el tiempo.
+            </li>
+            <li>
+                <strong>Idioms de interacción:</strong> Para seleccionar el artista se implementó una interacción con el mouse, 
+                donde al hacer click en un artista escogido en la nube de palabras, se despliega un segundo gráfico 
+                que muestra la información de cantidad de streams del artista a lo largo de los meses (Este gráfico se encuentra abajo de la nube de palabras). 
+                Se implementó otra interacción con el mouse que es un tooltip, que al pasar el mouse sobre el círculo que se encuentra 
+                sobre la línea, se muestra la cantidad de streams que tiene el artista en ese mes. Se implementó de esta forma
+                por sobre un simple gráfico de línea porque se tienen un máximo de 60 meses y tener esas 60 marcas en el eje x
+                hace díficil la visualización.
+            </li>
+        </div>
+    </p>
+    <h4> Tarea 3: Seleccionar otro país</h4>
+    <p>
+        Para lograr el objetivo planteado por esta tarea, se hizo uso de:
+        <div>
+            <li>
+                <strong>Idioms de interacción:</strong> Se implementó un selector de países en el documento HTML, 
+                que permite al usuario seleccionar una serie de países y al hacer click en el nombre del país, 
+                se actualiza la nube de palabras y se muestran los artistas mas escuchados en ese país. Luego 
+                de esto se 
+            </li>
+
+        </div>
+    </p>
+
+    <div class="button-container">
+        <a href="wordcloud.html" class="viz-button">Ver Visualización</a>
+    </div>
+
+</body>
+</html>

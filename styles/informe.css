@@ -1,0 +1,38 @@
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+}
+
+.viz-button {
+    margin: 0 10px;
+    background-color: #191414;
+    color: rgb(10, 143, 10);
+    border: 1px solid rgb(10, 143, 10);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.viz-button:hover {
+    background-color: rgb(10, 143, 10);
+    color: #191414;
+}
+
+body {
+    color : #191414;
+    background-color: whitesmoke;
+    margin : 10%;
+    /* justify the text */
+    text-align: justify;
+    font-family: 'Roboto', sans-serif;
+}
+
+h3 {
+    color: rgb(10, 143, 10);
+}
+
+h1{
+    text-align: right;
+}
